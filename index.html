@@ -4,20 +4,89 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Introduction to Databases</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="dist/theme/white.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+
+		<style type="text/css">
+		    section.title-slide {
+				position: absolute;
+				top: 50%;
+				margin:0;
+			}
+			.title-slide h2, .title-slide h3 {
+				color: white;
+			}
+
+			section.content-slide {
+				margin: 0;
+			}
+
+			section.content-slide h3:first-child {
+				color: white;
+				margin-top: 20px;
+				margin-bottom: 50px;
+			}
+
+			.reveal .slides section[data-vertical-align-top]{
+				top: 0 !important;
+				left: 0 !important;
+			}
+
+			.reveal .slides {
+				text-align: left !important;
+				padding-left: 500px;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-markdown data-separator="---" data-separator-vertical="--" data-background-image="dist/images/title_background.svg" class="title-slide">
+					<textarea data-template>
+					  ## Introduction to Databases
+
+
+					  ### Ralf Grubenmann
+					</textarea>
+				</section>
+				<section data-markdown data-separator="---" data-separator-vertical="--" data-background-image="dist/images/slide_background.svg" class="content-slide">
+					<textarea data-template>
+					  ### Why Databases
+
+					  * Organized, structured collection of data
+					  * Fast access to records
+					  * Fast queries/projections
+
+					  ---
+
+					  ### Types of databases
+
+					  * Relational/SQL
+						- Use Tables with Ids
+						- Fixed Schemas
+						- Strict relations
+					  * NoSQL
+					  * Graph
+
+					  ---
+
+					  ### Relational Databases
+
+					  --
+
+					  ### Tables
+
+					  --
+
+					  ### Relationships
+					</textarea>
+				  </section>
 			</div>
 		</div>
 
@@ -25,15 +94,28 @@
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+		<script src="bower_components/reveal.js-menu/menu.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
+				progress: true,
+				slideNumber: "h.v",
+				center: false,
+				width: 1920,
+				height: 1080,
+				minScale: 0.2,
+				maxScale: 4.0,
+				margin: 0,
+
+				menu: {
+					themes: true
+				},
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu ]
 			});
 		</script>
 	</body>
