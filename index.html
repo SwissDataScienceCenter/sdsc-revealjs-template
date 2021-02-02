@@ -57,11 +57,22 @@
 				</section>
 				<section data-markdown data-separator="---" data-separator-vertical="--" data-background-image="dist/images/slide_background.svg" class="content-slide">
 					<textarea data-template>
-					  ### Why Databases
+					  ### What are Databases
 
 					  * Organized, structured collection of data
 					  * Fast access to records
 					  * Fast queries/projections
+					  <p class="fragment fade-out" data-fragment-index="1" style="position:fixed;top:50%;left:50%;"><img src="dist/images/database-illustration.png" width="300" /></p>
+					  <p class="fragment fade-in" data-fragment-index="1" style="position:fixed;top:50%;left:50%;"><img src="dist/images/emmentaler2.png" width="300" height="315" /></p>
+
+<br/><br/>
+
+					  #### Use-cases
+
+					  * Help with understanding datasets
+					  * Provide easy access to (subsets of) data
+					  * Dealing with streams of data
+					  * Adding metadata to data
 
 					  ---
 
@@ -71,20 +82,99 @@
 						- Use Tables with Ids
 						- Fixed Schemas
 						- Strict relations
+						- Consistency guarantees
 					  * NoSQL
 					  * Graph
+
+					  <img src="dist/images/relational-database.png"  height="200" width="300" style="position:fixed;top:30%;left:40%;" />
+					  <img src="dist/images/nosql-databases.jpg"  height="200" width="300" style="position:fixed;top:65%;left:40%;" />
+					  <img src="dist/images/graph-database.png"  height="200" width="300" style="position:fixed;top:100%;left:40%;" />
 
 					  ---
 
 					  ### Relational Databases
 
+					  * store data in tables with predefined schemas and fixed datatypes
+					  * have fixed relations between tables
+					  * suitable for structured data
+					  * ACID guarantees
+						- Atomicity
+						- Consistency
+						- Isolation
+						- Durability
+
+						<img src="dist/images/sqlite.png" width="250" style="position:fixed;top:35%;left:40%;" />
+						<img src="dist/images/Postgresql_elephant.svg"  width="200" style="position:fixed;top:50%;left:40%;" />
+						<img src="dist/images/mariadb.png" width="250" style="position:fixed;top:27%;left:55%;" />
+						<img src="dist/images/mssql.jpg" width="250" style="position:fixed;top:50%;left:55%;" />
+					  Note:
+					  A: Succeed or rollback, C: One valid state to another, I: concurrency, D: permanent, even on system failure
 					  --
 
 					  ### Tables
 
+					  * Basic store of data. Simple lists of entries as rows and values in columns
+					  * Think pandas DataFrame
+					  * Usually have one (or more...) columns as primary key (Unique identifier of a record, int or UUID)
+					  * Fast lookup and writes.
+					  * Can be filtered, projected etc. (Basically Excel)
+
+
+					  <img src="dist/images/pgadmin_tables.png" width="600" style="position:fixed;top:35%;left:40%;" />
 					  --
 
 					  ### Relationships
+
+					  * Define how table are related to each other
+					  * Consist of matching ids in tables
+					  * can be 1:1, 1:n or n:n
+					  * Can add constraints to restrict what is/isn't allows
+
+					  <p class="fragment fade-out" data-fragment-index="1" style="position:fixed;top:50%;left:50%;"><img src="dist/images/simple_db_diagram.png" width="600" style="position:fixed;top:35%;left:40%;" /></p>
+					  <p class="fragment fade-in" data-fragment-index="1" style="position:fixed;top:50%;left:50%;"><img src="dist/images/huge-database-diagram.jpg" width="600" style="position:fixed;top:35%;left:40%;" /></p>
+					  --
+
+					  ### Indices
+
+					  * Use for fast querying/lookup on columns
+					  * Can make a HUGE difference for performance
+					  * Internally uses B-Trees pointing to paged data
+
+					  <img src="dist/images/pg-index.png" width="600" style="position:fixed;top:35%;left:40%;" />
+					  --
+
+					  ### SQL (Structured Query Language)
+
+					  * Used for interaction with the database
+					  * Mostly the same across SQL DB implementations
+					  * Easy to learn but the devil is in the details
+
+					  <pre><code data-line-numbers="1|2|3">  SELECT *
+						  FROM users
+						  WHERE id=5;
+					  </code></pre>
+
+					  <pre><code data-line-numbers="|1|2|3-4|5" data-noescape>  INSERT INTO users (Name, Surname, Email)
+						  VALUES
+						  ("Frank", "Doe", "john.doe@example.com"),
+						  ("Sue", "Doe", "sue.doe@example.com")
+						  RETURNING *;
+					  </code></pre>
+
+					  <pre><code data-line-numbers="|1|2|3">  UPDATE users
+						  SET name="John"
+						  WHERE id=5;
+					  </code></pre>
+
+					  <pre><code data-line-numbers="|1|2">  DELETE FROM users
+						  WHERE id=5;
+					  </code></pre>
+
+					  <pre><code data-line-numbers="|1-2|3|4">  SELECT u.Name, u.Email
+						  FROM users u
+						  INNER JOIN addresses a ON a.user_id = u.id
+						  WHERE a.ZipCode = 8001
+					  </code></pre>
 					</textarea>
 				  </section>
 			</div>
@@ -109,6 +199,8 @@
 				minScale: 0.2,
 				maxScale: 4.0,
 				margin: 0,
+				transition: "slide",
+				backgroundTransition: "slide",
 
 				menu: {
 					themes: true
