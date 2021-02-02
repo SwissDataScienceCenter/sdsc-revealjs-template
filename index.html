@@ -175,6 +175,90 @@
 						  INNER JOIN addresses a ON a.user_id = u.id
 						  WHERE a.ZipCode = 8001
 					  </code></pre>
+
+					  ---
+
+					  ### NoSQL Databases
+
+					  * Don't use a fixed schema and relationships
+					  * Very simple to use, but easy to shoot yourself in the foot
+					  * Easy to scale (especially reads), at the cost of consistency
+					  * Likely better suited for "quick & dirty" prototyping
+
+					  --
+
+					  ### Key-Value stores
+
+					  * Basically a giant python dictionary
+					  * Keys are usually arbitrary strings
+					  * Values can be simple types like strings or complex types (lists/sets/maps)
+					  * Queries mostly limited to keys/ranges of keys and wildcards\
+					    (e.g. <b>user:1:name</b> or <b>user.1.*</b> or <b>user-*</b>)
+
+					  --
+
+					  ### Document Stores
+
+					  * Organized around "Documents" as basic data structure. \
+					    Can be JSON, YAML, XML etc.
+					  * Each document gets a unique key, but can contain nested
+					  * No structure enforced on documents (Sometimes schema validation is supported)
+					  * Support key lookups and usually matching the content of documents
+
+					  <pre><code>"user:15": {
+						  "name": "John Doe",
+						  "email": "john.doe@example.com",
+						  "address": {
+							"street": "Universitätstrasse 25",
+							"zipcode": 8006,
+							"city": "Zürich"
+						  },
+						  "projects": [ 1, 2, 3, 5, 8, 13 ]
+					  }
+					  </code></pre>
+
+					  ---
+
+					  ### Graph Databases
+
+					  * Have nodes (documents) and edges (relations)
+					  * Relations can be dynamic and don't need to be predefined
+					  * Relations can be directional
+					  * (Usually) relations can also have properties/values
+					  * Allow efficient path traversals
+
+					  <img src="dist/images/neo4j-graph.png" width="650" style="position:fixed;top:35%;left:35%;" />
+
+					  --
+
+					  ### Example
+
+					  * Find friends of friends of user 5 that are 1 to 5 "friend of" edges removed
+
+					  SQL:
+					  <pre><code>SELECT u.id
+						FROM user u
+						JOIN user u2 ON u2.friend_id=u.id
+						JOIN user u3 ON u3.friend_id=u2.id
+						JOIN user u4 ON u4.friend_id=u3.id
+						JOIN user u5 ON u5.friend_id=u4.id
+						WHERE u2.id=5 or u3.id=5 or u4.id=5 or u5.id=5
+					  </code></pre>
+					  Neo4J:
+					  <pre><code>MATCH (user:User { id: 5})-[:FRIEND_OF*1..5]-(friend:User)
+						RETURN friend.id
+					  </code></pre>
+
+					  ---
+
+					  ### Questions?
+
+					  <pre class="sql" style="width:60%;margin:300px 40px 40px;font-size:0.8em;"><code>SELECT a.name, q.text
+					FROM Audience a
+					RIGHT JOIN Question q ON q.audience_member_id=a.id
+					WHERE q.answered = FALSE</code></pre>
+
+					  </textarea>
 					</textarea>
 				  </section>
 			</div>
