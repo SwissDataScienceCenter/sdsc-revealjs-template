@@ -15,9 +15,15 @@
 
 		<style type="text/css">
 		    section.title-slide {
-				position: absolute;
-				top: 50%;
-				margin:0;
+				position: absolute !important;
+				top: 50% !important;
+				margin:0 !important;
+			}
+		    html.print-pdf .reveal .slides .pdf-page section.title-slide {
+				position: absolute !important;
+				top: 50% !important;
+				left:30% !important;
+				margin:0 !important;
 			}
 			.title-slide h2, .title-slide h3 {
 				color: white;
@@ -38,15 +44,15 @@
 				left: 0 !important;
 			}
 
-			.reveal .slides {
+			.reveal .slides, html.print-pdf .reveal .slides .pdf-page section {
 				text-align: left !important;
-				padding-left: 500px;
+				margin-left: 500px !important;
 			}
 		</style>
 	</head>
 	<body>
 		<div class="reveal">
-			<div class="slides">
+			<div class="slides slides-pdf">
 				<section data-markdown data-separator="---" data-separator-vertical="--" data-background-image="dist/images/title_background.svg" class="title-slide">
 					<textarea data-template>
 					  ## Introduction to Databases
@@ -62,8 +68,8 @@
 					  * Organized, structured collection of data
 					  * Fast access to records
 					  * Fast queries/projections
-					  <p class="fragment fade-out" data-fragment-index="1" style="position:fixed;top:50%;left:50%;"><img src="dist/images/database-illustration.png" width="300" /></p>
-					  <p class="fragment fade-in" data-fragment-index="1" style="position:fixed;top:50%;left:50%;"><img src="dist/images/emmentaler2.png" width="300" height="315" /></p>
+					  <p class="fragment fade-out" data-fragment-index="1" style="position:absolute;top:50%;left:50%;"><img src="dist/images/database-illustration.png" width="300" /></p>
+					  <p class="fragment fade-in" data-fragment-index="1" style="position:absolute;top:50%;left:50%;"><img src="dist/images/emmentaler2.png" width="300" height="315" /></p>
 
 <br/><br/>
 
@@ -86,9 +92,9 @@
 					  * NoSQL
 					  * Graph
 
-					  <img src="dist/images/relational-database.png"  height="200" width="300" style="position:fixed;top:30%;left:40%;" />
-					  <img src="dist/images/nosql-databases.jpg"  height="200" width="300" style="position:fixed;top:65%;left:40%;" />
-					  <img src="dist/images/graph-database.png"  height="200" width="300" style="position:fixed;top:100%;left:40%;" />
+					  <img src="dist/images/relational-database.png"  height="200" width="300" style="position:relative;top:-8em;left:25em;" /><br>
+					  <img src="dist/images/nosql-databases.jpg"  height="200" width="300" style="position:relative;top:-9em;left:25em;" /><br>
+					  <img src="dist/images/graph-database.png"  height="200" width="300" style="position:relative;top:-10em;left:25em;" />
 
 					  ---
 
@@ -103,24 +109,25 @@
 						- Isolation
 						- Durability
 
-						<img src="dist/images/sqlite.png" width="250" style="position:fixed;top:35%;left:40%;" />
-						<img src="dist/images/Postgresql_elephant.svg"  width="200" style="position:fixed;top:50%;left:40%;" />
-						<img src="dist/images/mariadb.png" width="250" style="position:fixed;top:27%;left:55%;" />
-						<img src="dist/images/mssql.jpg" width="250" style="position:fixed;top:50%;left:55%;" />
+						<img src="dist/images/sqlite.png" width="250" style="position:relative;top:-10em;left:20em;" />
+						<img src="dist/images/mariadb.png" width="250" style="position:relative;top:-9em;left:20em;" /><br>
+						<img src="dist/images/Postgresql_elephant.svg"  width="200" style="position:relative;top:-10em;left:20em" />
+						<img src="dist/images/mssql.jpg" width="250" style="position:relative;top:-10em;left:21em;" />
 					  Note:
 					  A: Succeed or rollback, C: One valid state to another, I: concurrency, D: permanent, even on system failure
+					  Some NoSQL also have (limited) ACID support
 					  --
 
 					  ### Tables
 
 					  * Basic store of data. Simple lists of entries as rows and values in columns
 					  * Think pandas DataFrame
-					  * Usually have one (or more...) columns as primary key (Unique identifier of a record, int or UUID)
+					  * Usually have one (or more...) columns as primary key
+					    - Unique identifier of a record, int or UUID
 					  * Fast lookup and writes.
 					  * Can be filtered, projected etc. (Basically Excel)
 
-
-					  <img src="dist/images/pgadmin_tables.png" width="600" style="position:fixed;top:35%;left:40%;" />
+					  <img src="dist/images/pgadmin_tables.png" width="600" style="position:relative;top:-6em;left:20em;" />
 					  --
 
 					  ### Relationships
@@ -130,8 +137,8 @@
 					  * can be 1:1, 1:n or n:n
 					  * Can add constraints to restrict what is/isn't allows
 
-					  <p class="fragment fade-out" data-fragment-index="1" style="position:fixed;top:50%;left:50%;"><img src="dist/images/simple_db_diagram.png" width="600" style="position:fixed;top:35%;left:40%;" /></p>
-					  <p class="fragment fade-in" data-fragment-index="1" style="position:fixed;top:50%;left:50%;"><img src="dist/images/huge-database-diagram.jpg" width="600" style="position:fixed;top:35%;left:40%;" /></p>
+					  <p class="fragment fade-out" data-fragment-index="1" style="position:relative;top:-4em;left:22em;"><img src="dist/images/simple_db_diagram.png" width="600" /></p>
+					  <p class="fragment fade-in" data-fragment-index="1" style="position:relative;top:-14em;left:22em;"><img src="dist/images/huge-database-diagram.jpg" width="600"/></p>
 					  --
 
 					  ### Indices
@@ -140,7 +147,7 @@
 					  * Can make a HUGE difference for performance
 					  * Internally uses B-Trees pointing to paged data
 
-					  <img src="dist/images/pg-index.png" width="600" style="position:fixed;top:35%;left:40%;" />
+					  <img src="dist/images/pg-index.png" width="600" style="position:relative;top:0em;left:20em;" />
 					  --
 
 					  ### SQL (Structured Query Language)
@@ -185,6 +192,11 @@
 					  * Easy to scale (especially reads), at the cost of consistency
 					  * Likely better suited for "quick & dirty" prototyping
 
+					  <img src="dist/images/1200px-Redis_Logo.svg.png" width="250" style="position:relative;top:-2em;left:20em;" />
+					  <img src="dist/images/couchdb.png" width="250" style="position:relative;top:0em;left:20em;" /><br>
+					  <img src="dist/images/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png"  width="200" style="position:relative;top:-1em;left:20em" />
+					  <img src="dist/images/ArangoDB-logo.png" width="250" style="position:relative;top:0em;left:21em;" />
+
 					  --
 
 					  ### Key-Value stores
@@ -194,6 +206,14 @@
 					  * Values can be simple types like strings or complex types (lists/sets/maps)
 					  * Queries mostly limited to keys/ranges of keys and wildcards\
 					    (e.g. <b>user:1:name</b> or <b>user.1.*</b> or <b>user-*</b>)
+
+						<pre><code>> SET mykey myvalue
+						OK
+						> GET mykey
+						"myvalue"
+						> DEL mykey
+						(integer) 1
+						</code></pre>
 
 					  --
 
@@ -227,7 +247,9 @@
 					  * (Usually) relations can also have properties/values
 					  * Allow efficient path traversals
 
-					  <img src="dist/images/neo4j-graph.png" width="650" style="position:fixed;top:35%;left:35%;" />
+					  <img src="dist/images/neo4j-graph.png" width="650" style="position:relative;top:-2em;left:18em;" /><br>
+					  <img src="dist/images/neo4j_logo-facebook.png" width="250" style="position:relative;top:-9.3em;left:0em;" />
+					  <img src="dist/images/ArangoDB-logo.png" width="250" style="position:relative;top:-10em;left:0em;" />
 
 					  --
 
@@ -248,6 +270,80 @@
 					  <pre><code>MATCH (user:User { id: 5})-[:FRIEND_OF*1..5]-(friend:User)
 						RETURN friend.id
 					  </code></pre>
+
+					  ---
+
+					  ### Datascience Use-Cases/Motivations
+
+					  * Easily explore and analyze data on the fly
+						- e.g. with software like Tableau
+					  * Deal with large amounts of data (and subsets of it) efficiently
+					  * Deal with online data
+					  * You were forced to use it
+
+					  <img src="dist/images/tableau.jpg" width="600" style="position:relative;top:-2em;left:18em;" />
+
+					  --
+
+					  ### CAP Theorem
+
+					  Choose two:
+
+					  * Consistency
+						- All instances have the same data
+					  * Availability
+						- Always get a non-error response (maybe with outdated data)
+					  * Partition Tolerance
+						- Network partitions don't matter
+
+						<img src="dist/images/cap-theorem.png" width="300" style="position:relative;top:-2em;left:20em;" />
+
+					  --
+
+					  ### SQL Databases
+
+					  * Structured, hierarchical data
+					  * Structure of data rarely changes
+					  * (Fixed) Relations and subsets of data joined by them matter
+
+					  E.g.
+					  * Accounting software
+					  * Product databases
+					  * Most enterprise software
+
+					  --
+
+					  ### NoSQL
+
+					  * Real-time analytics, large volume of simple data
+					  * Structure of data is likely to change
+					  * Relations don't matter or clear parent - child relations
+					  * Large amounts of text in single fields
+					  * Polish CV / Want to be cool
+
+					  E.g.
+					  * Online sensor data
+					  * Big data (like simulation results)
+					  * High availability*
+					  * Genomic data
+
+					  --
+
+					  ### Graph Databases
+
+					  * Many relations between entries
+					  * Sparse relations (Not everyone has friends &#128546; )
+					  * Qualified relations
+					  * Path queries matter
+						- You're interested in how to get from A to B, less what A and B are
+
+					  E.g.
+
+					  * Friends of Friends networks/Social networks
+					  * Recommender systems
+					  * Symbolic reasoning
+					  * Renku (Knowledge graphs)
+
 
 					  ---
 
