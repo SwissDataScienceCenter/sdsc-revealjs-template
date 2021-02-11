@@ -1,7 +1,7 @@
-Introduction to Databases
-=========================
+SDSC revealjs template
+======================
 
-Presentation about Relational/NoSQL/Graph databases
+Presentation template using revealjs
 
 Run ``npm start`` to start the presentation.
 
@@ -11,4 +11,4 @@ Images should be stored in ``dist/images/``
 
 See https://revealjs.com/markdown/ for revealjs docs.
 
-Implemented with revealjs.
+Implemented with revealjs
